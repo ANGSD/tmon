@@ -1,0 +1,57 @@
+.TH TMON 1 "Feb 05, 2009" "" "Linux User's Manual"
+.SH NAME
+tmon \- tMon distributed resource monitor client
+.SH SYNOPSIS
+.B tmon
+[\c
+.BI \-f \ rcfile\fP\c
+]
+.br
+.SH DESCRIPTION
+\fBtmon\fP is the client part of the tMon Distributed Resource Monitor. The
+\fBtmon\fP client creates a TCP/IP connection to the \fBtmond\fP(8) daemon 
+running on each of the hosts that are to be monitored. This is basicly a revamped edition of the orphaned package by Jaco Breitenback. The program wont hang on non working computers in the tmonrc file. And The program doesn't  use swap but harddisk usage. 
+.LP
+The client displays CPU, memory and disk usage on the host machines. The amount 
+of resources consumed is displayed as a horizontal bar, ranging between 0% and 
+100%. Where the terminal is capable of colour, a load between 0% and 33% is 
+indicated in green, 33% to 66% in yellow, and 66%+ in red.
+.LP
+With a long list of hosts on display, it is possible to scroll through the
+list using the cursor keys, or simply resize the window in X.
+.SH OPTIONS
+.TP
+.BI \-f \ rcfile\fP
+This parameter specifies the \fBrcfile\fP to be used. This parameter is
+optional, with the default being \fB.tmonrc\fP in the user's home directory,
+or failing that, \fB/etc/tmonrc\fP. 
+.SH CONFIGURATION FILE
+The configuration file is a text file with the following format:
+.br
+       hostname     port
+.br
+.LP
+The hostname and port are space delimited, with multiple hosts specified on
+separate lines, e.g.:
+.br
+       wintermute.dsp.sun.ac.za      7777
+       saiph.dsp.sun.ac.za           7777
+.br
+.LP
+By default the configuration is read from \fB$HOME/.tmonrc\fP or 
+\fB/etc/tmonrc\fP if the first does not exist. It is possible
+to specify an alternative rcfile, using the \fB\-f\fP parameter.
+.SH FILES
+.DT
+/usr/local/bin/tmon
+.br
+$HOME/.tmonrc
+.SH NOTES
+tmon does NOT support comments in the files above.
+.SH AUTHOR
+Thorfinn Sand Kornliussen <thorfinn@binf.ku.dk>. 
+
+Jaco Breitenbach <jjb@dsp.sun.ac.za>.
+.SH "SEE ALSO"
+.BR tmond (8)
+

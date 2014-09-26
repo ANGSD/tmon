@@ -1,0 +1,16 @@
+                 jMon - A distributed resource monitor
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To install:
+
+(1) make
+(2) make install
+
+This will first compile both the daemon and client, then copy the daemon, 
+jmond, to /usr/sbin and the client, jmon, to /usr/bin. Note that only root 
+should be allowed to install the binaries.
+
+Edit and copy the jmonrc file to your home directory as ~/.jmonrc which is the
+default filename. Alternative filenames may be specified on the command line. 
+
+For any queries, suggestions or bug reports, please contact the author,
+Jaco Breitenbach <jjb@dsp.sun.ac.za> or http://www.dsp.sun.ac.za/~jjb

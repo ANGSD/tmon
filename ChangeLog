@@ -1,0 +1,23 @@
+Log of changes for the jMon/tmon package.
+
+10/09/1999   version 0.3.1
+   + Fixed problem with ncurses attr_get() macro incompatibility by removing it.
+   + Made the alternative rcfile /etc/jmonrc if $HOME/.jmonrc does not exist.
+   + Fixed potential problem with recv() by providing custom SIGPIPE handler,
+     instead of using MSG_NOSIGNAL.
+   + Reduced the level of compiler optimization from -O6 to -O2.
+
+?/?/2009 versgion 0.4.0 tsk
+	+ Fixed some problems changed swap usage to harddrive usage etc
+
+25/8/2013 version 0.4.1
+	+ changed the installation daemon to work with newer version of linux
+	+ changed name to tmon
+
+20/03/2014 version 0.4.2
+	+ Fixed a very slow memory leak with PTHREAD_DETACHED as default attrib
+
+20/03/2014 version 0.4.3
+	+ tmon now shows number of cores and total amount of memory on remote hosts
+26/09/2014 
+	+ put on github

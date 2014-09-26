@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# chkconfig: 345 77 77
+# description: tmond is the daemon part of the tmon suite. tmon can be used \
+# for remote resource monitoring on large networks.
+# PID file: /var/run/tmond.pid
+# Lock file: /var/lock/tmond.lock
+#
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+DAEMON=/usr/local/sbin/tmond
+LOCK=/var/lock/tmond.lock
+PIDFILE=/var/run/tmond.pid
+
+
+. /lib/lsb/init-functions
+
+# See how we were called.
+case "$1" in
+  start)
+	log_daemon_msg "Starting resource monitor daemon" "tmond"
+	start_daemon -p ${PIDFILE}  ${DAEMON}
+	log_end_msg $?
+	touch ${LOCK}
+	;;
+  stop)
+	log_daemon_msg "Stopping resource monitor daemon" "tmond"
+	killproc -p $PIDFILE ${DAEMON}
+	log_end_msg $?
+	rm -f ${LOCK}
+	rm -f ${PIDFILE}
+	;;
+  force-reload|restart)
+	$0 stop
+	$0 start
+	;;
+  status)
+    status_of_proc -p $PIDFILE $DAEMON tmond && exit 0 || exit $?
+
+	;;
+  *)
+	echo "Usage: tmond {start|stop|restart|status|force-reload}"
+	exit 1
+esac
+
+exit 0
+

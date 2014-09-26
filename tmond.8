@@ -1,0 +1,38 @@
+.TH tMOND 8 "Feb 5, 2009" "" "Linux System Administrator's Manual"
+.SH NAME
+tmond \- tMon distributed resource monitor daemon
+.SH SYNOPSIS
+.B tmond
+[\c
+.BI \-p \ port\fP\c
+]
+.br
+.SH DESCRIPTION
+\fBtmond\fP is the daemon part of the tMon Distributed Resource Monitor. The
+\fBtmon\fP(1) client creates a TCP/IP connection to the \fBtmond\fP daemon 
+running on each of the hosts that are to be monitored. The daemon calculates 
+the resource usage from the \fB/proc\fP filesystem.
+.SH OPTIONS
+.TP
+.BI \-p \ port\fP
+This parameter specifies the \fBport\fP that the daemon should listen on. This 
+parameter is optional, with the default being port \fB7777\fP. 
+.SH DIAGNOSTICS
+The daemon calculates the resource usage from \fB/proc/stat\fP (CPU info) and
+\fB/proc/meminfo\fP (memory) and statvfs for the disk usage. In order to allow this process,
+support for the virtual /proc filesystem MUST be compiled into the kernel and 
+it must be mounted.
+.LP
+For the sake of convenience, the \fBtmond\fP daemon us using the lsb standard to conform with debian. The daemon writes its process id to the file \fB/var/run/tmond.pid\fP. And a lock file to /var/lock/tmond.lock.
+.SH FILES
+.DT
+/usr/local/sbin/tmond
+.br
+/var/run/tmond.pid
+.SH AUTHOR
+Thorfinn Sand Korneliussen <thorfinn@binf.ku.dk>
+
+Jaco Breitenbach <jjb@dsp.sun.ac.za>
+.SH "SEE ALSO"
+.BR tmon (1)
+
