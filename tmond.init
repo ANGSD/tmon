@@ -1,5 +1,13 @@
 #!/bin/sh
-#
+### BEGIN INIT INFO
+# Provides:          tmond
+# Required-Start:
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: The client for the tMon daemon
+# Description:       The client for the tMon daemon.
+### END INIT INFO
 # chkconfig: 345 77 77
 # description: tmond is the daemon part of the tmon suite. tmon can be used \
 # for remote resource monitoring on large networks.
