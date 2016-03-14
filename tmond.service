@@ -1,0 +1,11 @@
+[Unit]
+Description=tmond is the daemon part of the tmon suite. tmon can be used for remote resource monitoring on large networks.
+After=network.target
+
+[Service]
+ExecStart=/usr/local/sbin/tmond
+Type=forking
+PIDFile=/var/run/tmond.pid
+
+[Install]
+WantedBy=default.target
