@@ -14,4 +14,4 @@ matrix:
       env: CFLAGS="-std=gnu99 -O0"
 
 before_script:
-script: make -e && make -e install
+script: make -e && sudo make -e install

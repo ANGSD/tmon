@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/ANGSD/tmon.svg?branch=master)](https://travis-ci.org/ANGSD/tmon)
-	tMon - A distributed resource monitor
+
+	 tMon - A distributed resource monitor
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 To install:
 (0) git clone https://github.com/ANGSD/tmon
