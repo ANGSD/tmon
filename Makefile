@@ -12,6 +12,7 @@ SBINDIR = $(DESTROOT)/sbin/
 MAN1DIR = $(DESTROOT)/man/man1/
 MAN8DIR = $(DESTROOT)/man/man8/
 INITDIR = /etc/init.d/
+SYSTEMDDIR = /lib/systemd/system
 
 all: tmon tmond
 
@@ -48,6 +49,8 @@ install-server: tmond
 	$(SETR) $(MAN8DIR)/tmond.8
 	$(INSTALL) tmond.init $(INITDIR)/tmond
 	$(SETRX) $(INITDIR)/tmond
+	$(MKDIR) $(SYSTEMDDIR)
+	$(INSTALL) tmond.service $(SYSTEMDDIR)/
 	$(INITDIR)/tmond start
 clean:
 	rm -f tmon tmond
