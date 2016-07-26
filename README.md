@@ -1,11 +1,12 @@
 [![Build Status](https://travis-ci.org/ANGSD/tmon.svg?branch=master)](https://travis-ci.org/ANGSD/tmon)
 
 	 tMon - A distributed resource monitor
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 To install:
-(0) git clone https://github.com/ANGSD/tmon
-(1) cd tmon;make
-(2) make install
+
+	git clone https://github.com/ANGSD/tmon
+	cd tmon;make
+	make install
 
 This will first compile both the daemon and client, then copy the daemon, 
 tmond, to /usr/sbin and the client, tmon, to /usr/bin. Note that only root 
