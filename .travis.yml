@@ -1,3 +1,5 @@
+sudo: required
+
 # Control file for continuous integration testing at http://travis-ci.org/
 # taken from samtools
 language: c
