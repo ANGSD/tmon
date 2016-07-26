@@ -1,0 +1,15 @@
+# Control file for continuous integration testing at http://travis-ci.org/
+# taken from samtools
+language: c
+compiler:
+  - clang
+  - gcc
+
+matrix:
+  include:
+    # An unoptimised C99 build, for detecting non-static inline functions
+    - compiler: gcc
+      env: CFLAGS="-std=gnu99 -O0"
+
+before_script:
+script: make -e && make -e install
