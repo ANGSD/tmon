@@ -20,3 +20,6 @@ This code was forked from an ubuntu package by thorfinn thorfinn@binf.ku.dk back
 See changelog for details of changes
 
 It using both the /etc/init.d/tmond and /lib/systemd/system/tmond.service
+
+For systemd to
+	systemctl enable tmond.service
