@@ -21,6 +21,6 @@ See changelog for details of changes
 
 It using both the /etc/init.d/tmond and /lib/systemd/system/tmond.service
 
-For systemd to
+For systemd do
 
 	systemctl enable tmond.service
