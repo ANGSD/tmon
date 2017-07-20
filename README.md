@@ -2,11 +2,15 @@
 
 	 tMon - A distributed resource monitor
 
-To install:
-
+To install on UBUNTU:
 	git clone https://github.com/ANGSD/tmon
 	cd tmon;make
 	make install
+
+If you are using redhat with no init.d
+please do
+       make install-redhat
+
 
 This will first compile both the daemon and client, then copy the daemon, 
 tmond, to /usr/sbin and the client, tmon, to /usr/bin. Note that only root 

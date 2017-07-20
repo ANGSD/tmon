@@ -22,7 +22,8 @@ tmon: tmon.c
 tmond: tmond.c
 	$(COMPILE) $(OPTFLAGS) -o tmond tmond.c $(LIBS)
 
-install: install-man install-client install-server
+install: install-man install-client install-server-ubuntu
+install-redhat: install-man install-client install-server-redhat
 
 install-man:
 	$(MKDIR) $(MAN1DIR)
@@ -40,7 +41,7 @@ install-client: tmon
 	$(INSTALL) tmon.1 $(MAN1DIR)
 	$(SETR) $(MAN1DIR)/tmon.1
 
-install-server: tmond
+install-server-ubuntu: tmond
 	$(MKDIR) $(SBINDIR)
 	$(INSTALL) tmond $(SBINDIR)
 	$(SETRX) $(SBINDIR)/tmond
@@ -52,6 +53,17 @@ install-server: tmond
 	$(MKDIR) $(SYSTEMDDIR)
 	$(INSTALL) tmond.service $(SYSTEMDDIR)/
 	$(INITDIR)/tmond start
+
+install-server-redhat: tmond
+	$(MKDIR) $(SBINDIR)
+	$(INSTALL) tmond $(SBINDIR)
+	$(SETRX) $(SBINDIR)/tmond
+	$(MKDIR) $(MAN8DIR)
+	$(INSTALL) tmond.8 $(MAN8DIR)
+	$(SETR) $(MAN8DIR)/tmond.8
+	$(INSTALL) tmond.service $(SYSTEMDDIR)/
+	/usr/bin/systemctl enable tmond.service
+	/usr/bin/systemctl start tmond.service
 clean:
 	rm -f tmon tmond
 
