@@ -184,6 +184,8 @@ void parse_rcfile (const char *rcfilename)	{
     exit(1);
   }
   while (fgets(hostline, 80, rcfile) != NULL)	{
+    if(strlen(hostline)>1&&hostline[0]=='#')
+      continue;
     if (sscanf(hostline, "%s %d", hostname, &port) == 2)	{
       addhost(hostname, (unsigned short int) port);
       NUM_HOSTS++;
