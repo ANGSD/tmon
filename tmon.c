@@ -78,8 +78,8 @@ struct hostitem	*topdisphost=NULL, *botdisphost=NULL;
 static int interrupted, waiting, NUM_HOSTS;
 
 
-void connect_socket (struct hostitem *server);
-void addhost (const char *hostname, unsigned short int port);
+int connect_socket (struct hostitem *server);
+int addhost (const char *hostname, unsigned short int port);
 void remove_host (struct hostitem *ptr);
 void parse_rcfile (const char *rcfilename);
 void bar_draw (int len, float val);
@@ -89,10 +89,10 @@ static void adjust(int sig);
 void Usage (void);
 
 
-void connect_socket (struct hostitem *server)	{
+int connect_socket (struct hostitem *server)	{
   struct hostent *hostinfo;
   static int pos = 0;
-
+  int retval = 0;
   if ((server->sock_fd = socket(PF_INET, SOCK_STREAM, 0)) < 0)	{
     endwin();
     perror("Socket");
@@ -128,13 +128,15 @@ void connect_socket (struct hostitem *server)	{
     else	{ 
       attrset(COLOR_PAIR(1) | A_BOLD);
       mvprintw(pos++,65,"Success");
+      retval = 1;
     }
     refresh();
   }
+  return retval;
 }
 
 
-void addhost (const char *hostname, unsigned short int port)	{
+int addhost (const char *hostname, unsigned short int port)	{
   struct hostitem *ptr;
 
   if ((ptr=(struct hostitem *) calloc(sizeof(struct hostitem),1)) == NULL) {
@@ -158,7 +160,7 @@ void addhost (const char *hostname, unsigned short int port)	{
   ptr->active = 1;
   
   lasthost = ptr;
-  connect_socket(ptr);
+  return connect_socket(ptr);
 }
 void remove_host (struct hostitem *ptr)	{
   if (ptr != NULL)	{
@@ -177,7 +179,7 @@ void parse_rcfile (const char *rcfilename)	{
   static char hostline[80];
   static char hostname[64];
   static int port;
-  
+  int astop = 0;
   NUM_HOSTS = 0;
   
   if (((rcfile=fopen(rcfilename, "r")) == NULL)
@@ -191,9 +193,18 @@ void parse_rcfile (const char *rcfilename)	{
     if(strlen(hostline)>1&&hostline[0]=='#')
       continue;
     if (sscanf(hostline, "%s %d", hostname, &port) == 2)	{
-      addhost(hostname, (unsigned short int) port);
+      if(addhost(hostname, (unsigned short int) port)!=1)
+	astop++;
       NUM_HOSTS++;
     }
+  }
+  if(astop){
+    int x,y;
+    getyx(stdscr,x,y);
+    attrset(DEFAULT_COLOUR);
+    mvprintw(x+2,0,"Problems finding tmond daemons from serverlist, will pause 4 seconds");
+    refresh();
+    sleep(4);
   }
   fclose(rcfile);
 }
