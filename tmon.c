@@ -1,5 +1,5 @@
 /****************************************************************************
-forked by thorfinn thorfinn@binf.ku.dk
+forked by thorfinn thorfinn.sand@gmail.com
                    tMon - Distributed Resource Monitor
 
                    Copyright (C) 1999 Jaco Breitenbach
@@ -104,26 +104,30 @@ void connect_socket (struct hostitem *server)	{
   hostinfo = gethostbyname(server->hostname);
   if (hostinfo == NULL)	{
     endwin();
-    fprintf(stderr, "Unknown host %s.\n", server->hostname);
+    attrset(COLOR_PAIR(3) | A_BOLD);
+    mvprintw(pos,0, "Unknown host: \"%s\" port: \"%d\"\n", server->hostname,server->port);
+    pos++;
+    refresh();
+    sleep(2);
     remove_host(server);
   }else{
     server->addr.sin_addr = *(struct in_addr *) hostinfo->h_addr;
     attrset(DEFAULT_COLOUR);
-    move(pos, 0);
-    printw("Connecting to host %s : %d",
-	 server->hostname, server->port);
+    mvprintw(pos,0,"Connecting to host %s : %d",server->hostname, server->port);
+    refresh();
     if (connect(server->sock_fd, (struct sockaddr *) &server->addr, 
 		sizeof(server->addr)) < 0)	{
       attrset(COLOR_PAIR(3) | A_BOLD);
-      move(pos++, 65);
-      //printw("Failed");
-      fprintf(stderr, "Host:\"%s\" is online but no daemon is running...\n",server->hostname);
+      mvprintw(pos,65,"Failed");
+      mvprintw(++pos,0, "Host:\"%s\" is online but no daemon is running...\n",server->hostname);
+      pos++;
+      refresh();
+      sleep(2);
       remove_host(server);
     }
     else	{ 
       attrset(COLOR_PAIR(1) | A_BOLD);
-      move(pos++, 65);
-      printw("Success");
+      mvprintw(pos++,65,"Success");
     }
     refresh();
   }
