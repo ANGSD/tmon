@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ANGSD/tmon.svg?branch=master)](https://travis-ci.org/ANGSD/tmon)
+## [![tests](https://github.com/ANGSD/declust/actions/workflows/tests.yml/badge.svg)](https://github.com/ANGSD/test/actions/workflows/tests.yml) tmon
 
 	 tMon - A distributed resource monitor
 
